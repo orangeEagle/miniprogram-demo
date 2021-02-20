@@ -4,6 +4,9 @@ global.isDemo = true
 App({
   
   onLaunch(opts, data) {
+    wx.cloud.init({
+      env:"study-4guy19rea9f207b6"
+    })
     const that = this;
     const canIUseSetBackgroundFetchToken = wx.canIUse('setBackgroundFetchToken')
     if (canIUseSetBackgroundFetchToken) {

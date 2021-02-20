@@ -4,12 +4,64 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '小程序官方组件展示',
+      title: '开发中，敬请期待',
       path: 'page/component/index'
     }
   },
 
+  //事件处理函数
+  bindViewTap: function() {
+    wx.navigateTo({
+      url: '../class/classroom'
+    })
+  },
+  
+  /**
+   * 展开、折叠效果
+  */
+ show: function () {
+  this.setData({
+    isshow: !this.data.isshow
+  })
+},
+
+  getTeam() {
+
+    var that = this
+      if( that.data.showGetTeamText == false )
+      {
+        that.setData({
+           buttonGetTeamText:'隐藏开发团队',
+           showGetTeamText:true
+        })
+    }else{
+      that.setData({
+        buttonGetTeamText:'显示开发团队',
+        showGetTeamText:false
+     })
+   }
+
+    wx.cloud.callFunction({
+      name:'testCloudFunction',
+      success(res){
+        console.log("请求云函数成功",res)
+        that.setData({
+          teamList: res.result.data
+        })
+        },
+      fail(res) {
+         console.log("请求云函数失败", res)
+         }
+    })
+  },
   data: {
+    buttonGetTeamText:'显示开发团队',
+    showGetTeamText:false,
+    headerst: ['姓名','性别','角色','年龄'],
+    isshow: false,
+
+    teamList: [],
+
     list: [
       {
         id: 'view',
