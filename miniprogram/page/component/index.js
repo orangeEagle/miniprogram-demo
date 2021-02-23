@@ -25,6 +25,23 @@ Page({
   })
 },
 
+yunTest2() {
+  wx.cloud.callFunction({
+    name:'Test2',
+    success(res){
+      console.log("请求云函数成功",res)
+      that.setData({
+        Test2: res.openid
+      })
+      },
+    fail(res) {
+       console.log("请求云函数失败", res)
+       }
+  })
+},
+
+
+
   getTeam() {
 
     var that = this
@@ -55,6 +72,7 @@ Page({
     })
   },
   data: {
+    Test2:'0',
     buttonGetTeamText:'显示开发团队',
     showGetTeamText:false,
     headerst: ['姓名','性别','角色','年龄'],
